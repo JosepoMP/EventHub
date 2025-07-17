@@ -1,4 +1,5 @@
-<h1 align="center"> English version </h1>
+_<h1 align="center"> English version </h1>_
+
 # EventHub: Advanced Event Management (Pure JavaScript SPA)
 
 This project is a Single Page Application (SPA) designed for event management. It allows users to explore events, register for them, and enables administrators to manage users and events through a dedicated control panel. The application is built using pure JavaScript, HTML, and CSS, demonstrating modern web development principles without relying on complex frameworks.
@@ -137,7 +138,8 @@ To run this project locally, you will need Node.js and `json-server` to simulate
 
 ---
 
-## Version español 
+_<h1 align="center"> Version Español </h1>_
+
 # EventHub: Gestión Avanzada de Eventos (SPA con JavaScript Puro)
 
 Este proyecto es una aplicación web de una sola página (SPA - Single Page Application) diseñada para la gestión de eventos. Permite a los usuarios explorar eventos, registrarse en ellos, y a los administradores gestionar usuarios y eventos a través de un panel de control dedicado. La aplicación está construida utilizando JavaScript puro, HTML y CSS, demostrando principios de desarrollo web moderno sin el uso de frameworks complejos.
