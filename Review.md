@@ -1,4 +1,4 @@
-_<h1 align="center"> English version </h1>_
+_<h1 align="center"> 📜​ English version </h1>_
 
 
 ## EventHub: Advanced Event Management (Pure JavaScript SPA)
@@ -140,7 +140,7 @@ To run this project locally, you will need Node.js and `json-server` to simulate
 ---
 <br>
 
-_<h1 align="center"> Version Español </h1>_
+_<h1 align="center"> 📜​ Version Español </h1>_
 
 
 ## EventHub: Gestión Avanzada de Eventos (SPA con JavaScript Puro)
