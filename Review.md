@@ -1,3 +1,143 @@
+## English version
+# EventHub: Advanced Event Management (Pure JavaScript SPA)
+
+This project is a Single Page Application (SPA) designed for event management. It allows users to explore events, register for them, and enables administrators to manage users and events through a dedicated control panel. The application is built using pure JavaScript, HTML, and CSS, demonstrating modern web development principles without relying on complex frameworks.
+
+## 1. JavaScript Project Structure
+
+The core of this application lies in its modular JavaScript architecture. Each main component of the application's logic is encapsulated in its own file, promoting maintainability, scalability, and code clarity.
+
+The `JS/` folder contains the following key files:
+
+-   `app.js`: The main entry point of the application. It orchestrates the initialization of all modules and handles the rendering logic for different views.
+-   `api.js`: A service for interacting with the backend API (simulated with `json-server`). It centralizes all HTTP calls (GET, POST, PUT, PATCH, DELETE) for events, users, and registrations.
+-   `auth.js`: Manages user authentication, registration, login/logout, and session persistence. It also handles role-based authorization (user/admin).
+-   `router.js`: Implements a client-side routing system for the SPA. It allows navigation between different "pages" without a full page reload, including protected routes and parameter handling.
+-   `ui-manager.js`: A dedicated class for managing the user interface. It is responsible for dynamically rendering content, displaying loading spinners, modals, "toast" notifications, and setting up form validation.
+-   `vite.config.js`: Configuration file for Vite, the build tool used in this project. It defines how the application is served and compiled.
+
+## 2. How JavaScript Works? (Architecture and Flow)
+
+The application follows a modular design pattern and relies on the interaction between its main components:
+
+### 2.1. `app.js` (The Orchestrator)
+
+-   **Initialization (`init()`):** Upon DOM loading (`DOMContentLoaded`), `app.js` creates instances of `Router`, `AuthManager`, `ApiService`, and `UIManager`.
+-   **Loading Management:** Displays a loading spinner at startup and hides it once the application is ready.
+-   **Navigation Setup:** Sets up listeners for the mobile navigation menu and updates navigation links based on the user's authentication status (`updateNavigation()`).
+-   **Route Definition:** Uses the `Router` to define all application routes (public, protected, and admin) and their respective rendering handlers.
+-   **Global Error Handling:** Includes `window.addEventListener("error")` and `window.addEventListener("unhandledrejection")` to catch unhandled errors and ensure navigation updates, displaying an error message if necessary.
+-   **View Rendering:** Contains methods like `renderHome()`, `renderLogin()`, `renderAdmin()`, etc., which are responsible for generating dynamic HTML for each "page" and passing it to the `UIManager` for display.
+-   **UI Interaction:** Provides global functions (accessible via `window.app`) to interact with the UI, such as `showCreateEventModal()`, `registerForEvent()`, etc., which are called directly from the HTML.
+
+### 2.2. `router.js` (The SPA Navigator)
+
+-   **Client-Side Routing:** Instead of full page reloads, the `Router` intercepts URL hash changes (`#/`) and renders the corresponding content.
+-   **`addRoute(path, handler, requiresAuth, requiredRole)`:** Allows defining routes with regular expressions to handle parameters (e.g., `/events/:id`).
+-   **Programmatic Navigation:** The `navigate(path)` method updates the browser history and triggers route handling.
+-   **Access Control:** Before executing a route handler, it checks if the route requires authentication (`requiresAuth`) and if the user has the necessary role (`requiredRole`) using the `AuthManager`. If requirements are not met, it redirects to login or displays an "Access Denied" message.
+-   **Parameter Extraction:** Dynamically extracts parameters from the URL (e.g., `id` from `/events/123`).
+
+### 2.3. `auth.js` (The Session Guardian)
+
+-   **Session Management:** Stores and retrieves authenticated user information in `localStorage` to persist the session across page reloads.
+-   **`login(identifier, password)`:** Authenticates the user against the simulated database, creates a session, and saves it.
+-   **`register(userData)`:** Registers new users, including basic validations (required fields, email format, password length) and checks for unique username/email.
+-   **`logout()`:** Clears the session from `localStorage` and resets the authentication state.
+-   **Role Control:** Provides methods like `getCurrentUser()`, `hasRole(role)`, and `isAdmin()` to check user status and permissions.
+-   **Change Notification:** Uses an observer pattern (`onAuthStateChange`, `notifyAuthStateChange`) to inform other modules (like `app.js` for navigation updates) about changes in the authentication state.
+
+### 2.4. `api.js` (The Backend Communicator)
+
+-   **Call Centralization:** Encapsulates all interactions with the backend (simulated by `json-server`).
+-   **`request(endpoint, options)`:** A generic method for making HTTP requests, with error handling and response content type detection.
+-   **Specific Methods:** Provides convenient methods for CRUD operations (`get`, `post`, `put`, `patch`, `delete`) and specific functions for business logic (e.g., `getEvents()`, `createEvent()`, `registerForEvent()`, `getDashboardStats()`).
+-   **Data Validation:** Includes basic validations before sending data to the backend (e.g., required fields when creating an event).
+-   **Business Logic:** Contains logic such as event capacity verification and managing `registeredCount` when registering/canceling.
+
+### 2.5. `ui-manager.js` (The Interface Builder)
+
+-   **Dynamic Rendering:** Injects HTML content into the main application container (`#content`).
+-   **Reusable UI Components:**
+    -   **`showLoading()` / `hideLoading()`:** Controls the visibility of a loading spinner.
+    -   **`showModal(title, content, options)` / `hideModal()`:** Manages the opening and closing of modals, including their content, title, and footer.
+    -   **`showToast(message, type, duration)`:** Displays "toast" notifications (pop-up messages) with different types (success, error, warning, info).
+    -   **`showConfirmation(message, onConfirm, onCancel)`:** Presents a confirmation dialog before executing critical actions.
+-   **Form Validation (`setupFormValidation(form, rules)`):**
+    -   Applies validation rules to form fields.
+    -   Displays specific error messages below each field.
+    -   Prevents form submission if there are errors.
+    -   Performs real-time validation (on field blur) and upon form submission attempt.
+-   **UI Utilities:** Includes functions for formatting dates, currencies, controlling button states (`setButtonLoading`), and basic animations.
+
+## 3. Key JavaScript Concepts Used
+
+-   **ES Modules (`import`/`export`):** The project is fully modularized, allowing code to be organized into separate files and easily reused.
+-   **JavaScript Classes:** Classes (`EventManagementApp`, `ApiService`, `AuthManager`, `Router`, `UIManager`) are used to encapsulate logic and data, following an object-oriented programming approach.
+-   **Asynchronous Programming (`async`/`await`, `Promises`):** All operations involving the network (API calls) or component initialization are handled asynchronously to prevent blocking the user interface. `Promise.all` is used to execute multiple promises concurrently.
+-   **DOM Manipulation:** Native JavaScript is used to select DOM elements (`document.getElementById`, `document.querySelectorAll`), modify their content (`innerHTML`), add/remove classes (`classList`), and attach/remove event listeners.
+-   **Event Listeners:** Used to respond to user interactions (clicks, form submissions, input changes) and browser events (DOM load, history changes).
+-   **`localStorage` and `sessionStorage`:** Used by `AuthManager` for user session persistence.
+-   **`FormData` API:** For easily collecting data from HTML forms.
+-   **`URLSearchParams`:** For building and parsing query parameters in API URLs.
+-   **Regular Expressions (`RegExp`):** Used in the `Router` to match routes with parameters and in `UIManager` for email validation.
+
+## 4. Project Setup and Execution
+
+To run this project locally, you will need Node.js and `json-server` to simulate the backend.
+
+### Prerequisites
+
+-   Node.js (version 14 or higher)
+-   npm (Node Package Manager) or yarn
+
+### Execution Steps
+
+1.  **Clone the Repository (if applicable) or download the files.**
+
+2.  **Install Dependencies:**
+    Open your terminal in the project root and run:
+    \`\`\`bash
+    npm install
+    \`\`\`
+    This will install `vite` and `json-server`.
+
+3.  **Start the API Server (Simulated Backend):**
+    The `db.json` file acts as your database. Start `json-server` to serve this data:
+    \`\`\`bash
+    npm run server
+    \`\`\`
+    This will start the API server at `http://localhost:3001`.
+
+4.  **Start the Web Application (Frontend):**
+    In a **new terminal** (keep the API server running in the first one), navigate to the project root and run:
+    \`\`\`bash
+    npm run dev
+    \`\`\`
+    This will start the web application at `http://localhost:3000` (or a similar port). It will automatically open in your browser.
+
+### Test Credentials
+
+-   **Admin User:**
+    -   **Username:** `admin`
+    -   **Password:** `admin123`
+-   **Regular User:**
+    -   **Username:** `user1`
+    -   **Password:** `user123`
+
+## 5. Potential Future Improvements
+
+-   **Global State Management:** For larger applications, consider a state management solution (e.g., Redux-like pattern) to simplify communication between components.
+-   **Reusable Components:** Create more complex and reusable UI components (e.g., an `EventCard` component instead of generating HTML in `app.js`).
+-   **Unit/Integration Testing:** Implement automated tests for business logic and UI components.
+-   **Performance Optimization:** Lazy loading modules, list virtualization for large tables.
+-   **Internationalization (i18n):** Support for multiple languages.
+-   **Accessibility (A11y):** Additional improvements for users with disabilities.
+-   **Real Backend:** Replace `json-server` with a real backend (Node.js with Express, Python with Flask/Django, etc.) and a database.
+
+---
+
+## Version español 
 # EventHub: Gestión Avanzada de Eventos (SPA con JavaScript Puro)
 
 Este proyecto es una aplicación web de una sola página (SPA - Single Page Application) diseñada para la gestión de eventos. Permite a los usuarios explorar eventos, registrarse en ellos, y a los administradores gestionar usuarios y eventos a través de un panel de control dedicado. La aplicación está construida utilizando JavaScript puro, HTML y CSS, demostrando principios de desarrollo web moderno sin el uso de frameworks complejos.
