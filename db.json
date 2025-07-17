@@ -1,0 +1,141 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@events.com",
+      "password": "admin123",
+      "role": "admin",
+      "firstName": "Admin",
+      "lastName": "User",
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "username": "user1",
+      "email": "user1@example.com",
+      "password": "user123",
+      "role": "user",
+      "firstName": "John",
+      "lastName": "Doe",
+      "createdAt": "2024-01-02T00:00:00.000Z"
+    },
+    {
+      "id": 1752590344177,
+      "username": "Admin",
+      "email": "Amin@gmail.com",
+      "password": "admin123",
+      "firstName": "Admin",
+      "lastName": "Admin",
+      "role": "user",
+      "createdAt": "2025-07-15T14:39:04.177Z"
+    },
+    {
+      "id": 1752597163328,
+      "username": "jose",
+      "email": "jose@gmail.com",
+      "password": "jose123",
+      "firstName": "Jose",
+      "lastName": "Patiño",
+      "role": "user",
+      "createdAt": "2025-07-15T16:32:43.328Z"
+    },
+    {
+      "id": 1752597625481,
+      "username": "aleja",
+      "email": "aleja@gmail.com",
+      "password": "aleja123",
+      "firstName": "aleja",
+      "lastName": "quiroga",
+      "role": "user",
+      "createdAt": "2025-07-15T16:40:25.481Z"
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "title": "Tech Conference 2024",
+      "description": "Annual technology conference featuring the latest innovations",
+      "date": "2024-03-15",
+      "time": "09:00",
+      "location": "Convention Center",
+      "capacity": 500,
+      "registeredCount": 246,
+      "category": "Technology",
+      "price": 150,
+      "imageUrl": "/placeholder.svg?height=300&width=400",
+      "organizer": "Tech Events Inc",
+      "status": "active",
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "title": "Music Festival",
+      "description": "Three-day music festival with international artists",
+      "date": "2024-04-20",
+      "time": "18:00",
+      "location": "Central Park",
+      "capacity": 2000,
+      "registeredCount": 1853,
+      "category": "Music",
+      "price": 75,
+      "imageUrl": "/placeholder.svg?height=300&width=400",
+      "organizer": "Music Events Co",
+      "status": "active",
+      "createdAt": "2024-01-05T00:00:00.000Z"
+    },
+    {
+      "title": "NBA",
+      "category": "Sports",
+      "description": "NBA event, sport event and deportive sales ",
+      "date": "2026-01-02",
+      "time": "15:50",
+      "location": "Centra park",
+      "capacity": 100,
+      "price": 10,
+      "organizer": "Daniel",
+      "id": 1752602382344,
+      "registeredCount": 0,
+      "status": "active",
+      "createdAt": "2025-07-15T17:59:42.344Z",
+      "imageUrl": "/placeholder.svg?height=300&width=400"
+    }
+  ],
+  "registrations": [
+    {
+      "id": 1,
+      "userId": 2,
+      "eventId": 1,
+      "registeredAt": "2024-01-10T00:00:00.000Z",
+      "status": "confirmed"
+    },
+    {
+      "id": 1752590378872,
+      "userId": 1752590344177,
+      "eventId": 2,
+      "registeredAt": "2025-07-15T14:39:38.872Z",
+      "status": "confirmed"
+    },
+    {
+      "id": 1752590391061,
+      "userId": 1752590344177,
+      "eventId": 1,
+      "registeredAt": "2025-07-15T14:39:51.061Z",
+      "status": "confirmed"
+    },
+    {
+      "id": 1752597630532,
+      "userId": 1752597625481,
+      "eventId": 2,
+      "registeredAt": "2025-07-15T16:40:30.532Z",
+      "status": "confirmed"
+    },
+    {
+      "id": 1752605038165,
+      "userId": 1752597163328,
+      "eventId": 2,
+      "registeredAt": "2025-07-15T18:43:58.165Z",
+      "status": "confirmed"
+    }
+  ]
+}
