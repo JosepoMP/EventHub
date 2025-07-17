@@ -72,7 +72,7 @@ The project is constantly evolving and being enhanced with new functionalities, 
 ```
 ## 🧪 How to Run the Project Locally
 
-To test and explore **WebAdmin** on your own machine, follow these steps:
+To test and explore **EventHub** on your own machine, follow these steps:
 
 ### 1. Clone the repository
 
