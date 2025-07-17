@@ -77,17 +77,21 @@ To test and explore **EventHub** on your own machine, follow these steps:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/WebAdmin.git
-cd WebAdmin
+git clone https://github.com/your-username/EventHub.git
+cd EventHub
 ```
 
 ### 2. Install JSON Server (if not installed)
+
+This project uses [JSON Server](https://github.com/typicode/json-server) to simulate a backend.
+
+Install it globally using:
 
 ```bash
 npm install -g json-server
 ```
 
-> You only need to install this once globally.
+> ✅ No additional dependencies or `npm install` are required — this project runs entirely on HTML, CSS, and JS.
 
 ### 3. Start the JSON Server
 
@@ -95,23 +99,25 @@ npm install -g json-server
 json-server --watch db.json --port 3000
 ```
 
-This will start a local API server at:  
+This will launch a fake REST API at:  
 **http://localhost:3000**
 
-### 4. Open the project
-
-You can now open `index.html` in your browser directly or use a local server (recommended):
+### 4. Open the project in your browser
 
 #### Option A – Open directly:
-- Just double-click `index.html` (but some features may not work due to browser restrictions)
+- Just double-click `index.html` to open it
+- ⚠️ Note: Some dynamic features may not work due to CORS or local file restrictions
 
-#### Option B – Use Live Server (VSCode plugin):
-- Open the folder in **VSCode**
-- Right-click `index.html` and choose **"Open with Live Server"**
+#### Option B – Recommended: Use a local server (like Live Server in VSCode)
+- Open the folder in **Visual Studio Code**
+- Install the **Live Server extension**
+- Right-click `index.html` → **"Open with Live Server"**
+
+> 🌐 The frontend will now communicate with your running `json-server` at port 3000
 
 ---
 
-> ✅ Now you're ready to use WebAdmin as a fully functional local SPA with persistent data, authentication, and admin panel logic — all powered by `db.json`.
+> ✅ You're all set! You can now use **EventHub** as a local Single Page App (SPA) with login, admin dashboard, event management, and persistent data — all simulated through `db.json`.
 
 ---
 
